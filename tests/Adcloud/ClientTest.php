@@ -2,11 +2,18 @@
 
 class Adcloud_ClientTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @returns Adcloud_Client
+     */
     private function getClient()
     {
         return new Adcloud_Client('code', 'secret');
     }
 
+    /**
+     * @param Adcloud_Client $client
+     * @return Adcloud_Backend
+     */
     private function getMockBackend(Adcloud_Client $client = null)
     {
         $backend = $this->getMock('Adcloud_Backend');

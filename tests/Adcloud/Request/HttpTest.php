@@ -2,6 +2,9 @@
 
 class Adcloud_Request_HttpTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @return Adcloud_Client
+     */
     private function getMockClient()
     {
         return $this->getMock(
@@ -11,6 +14,10 @@ class Adcloud_Request_HttpTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @param Adcloud_Client $client
+     * @return Adcloud_Request_HttpTest
+     */
     private function getRequest(Adcloud_Client $client = null)
     {
         if ($client === null) {
