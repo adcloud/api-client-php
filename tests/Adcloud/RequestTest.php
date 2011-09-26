@@ -40,6 +40,48 @@ class Adcloud_RequestTest extends PHPUnit_Framework_TestCase
         $response = $request->getResponse();
         $this->assertEquals('foo', $response);
     }
+
+    public function testSetAndGetPage()
+    {
+        $request = $this->getRequest();
+        
+        $this->assertTrue($request === $request->setPage(42));
+        $this->assertEquals(42, $request->getPage());
+    }
+    
+    public function testSetPageCastsToInt()
+    {
+        $request = $this->getRequest();
+
+        $this->assertTrue($request === $request->setPage('42'));
+        $this->assertEquals(42, $request->getPage());
+    }
+
+    public function testDefaultPage()
+    {
+        $this->assertEquals(1, $this->getRequest()->getPage());
+    }
+
+    public function testSetAndGetPerPage()
+    {
+        $request = $this->getRequest();
+        
+        $this->assertTrue($request === $request->setPerPage(42));
+        $this->assertEquals(42, $request->getPerPage());
+    }
+    
+    public function testSetPerPageCastsToInt()
+    {
+        $request = $this->getRequest();
+
+        $this->assertTrue($request === $request->setPerPage('42'));
+        $this->assertEquals(42, $request->getPerPage());
+    }
+
+    public function testDefaultPerPage()
+    {
+        $this->assertEquals(50, $this->getRequest()->getPerPage());
+    }
 }
 
 
