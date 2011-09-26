@@ -13,13 +13,31 @@ class Adcloud_Request
     private $perPage = 50;
 
     /**
-     * @param string $method
+     * @var string
+     */
+    private $entity;
+
+    /**
+     * @var Adcloud_Client
+     */
+    private $client;
+
+    /**
+     * @param string $entity
      * @param Adcloud_Client $client
      */
-    public function __construct($method, Adcloud_Client $client)
+    public function __construct($entity, Adcloud_Client $client)
     {
-        $this->method = $method;
+        $this->entity = $entity;
         $this->client = $client;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntity()
+    {
+        return $this->entity;
     }
 
     /**

@@ -82,6 +82,14 @@ class Adcloud_RequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(50, $this->getRequest()->getPerPage());
     }
+
+    public function testEntiySetViaConstructorAndOwnGetter()
+    {
+        $client = $this->getMockClient();
+        $request = new Adcloud_Request('foo/bar', $client);
+
+        $this->assertEquals('foo/bar', $request->getEntity());
+    }
 }
 
 
