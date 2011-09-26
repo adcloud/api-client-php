@@ -13,6 +13,11 @@ class Adcloud_Request
     private $perPage = 50;
 
     /**
+     * @var array
+     */
+    private $filter = array();
+
+    /**
      * @var string
      */
     private $entity;
@@ -30,6 +35,25 @@ class Adcloud_Request
     {
         $this->entity = $entity;
         $this->client = $client;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFilter()
+    {
+        return $this->filter;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return Adcloud_Request
+     */
+    public function addFilter($key, $value)
+    {
+        $this->filter[$key] = $value;
+        return $this;
     }
 
     /**
