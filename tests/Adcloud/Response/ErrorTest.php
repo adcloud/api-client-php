@@ -21,4 +21,10 @@ class Adcloud_Response_ErrorTest extends PHPUnit_Framework_TestCase
         $interfaces = class_implements($error);
         $this->assertContains('Adcloud_Response_Interface', $interfaces);
     }
+
+    public function testExceptionIfResultIsNotAnArray()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        new Adcloud_Response_Error(200, '');
+    }
 }
