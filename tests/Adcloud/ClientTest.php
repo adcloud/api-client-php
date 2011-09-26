@@ -65,7 +65,7 @@ class Adcloud_ClientTest extends PHPUnit_Framework_TestCase
     {
         $client = $this->getClient();
         $backend = $this->getMockBackend($client);
-        $request = new Adcloud_Request_Http('foo', $client); 
+        $request = new Adcloud_Request('foo', $client); 
 
         $backend->expects($this->once())
             ->method('execute')
@@ -96,9 +96,8 @@ class Adcloud_ClientTest extends PHPUnit_Framework_TestCase
     {
         $client = $this->getClient();
         $request = $client->request('foo');
-        $interface = "Adcloud_Request";
 
-        $this->assertContains($interface, class_implements($request));
+        $this->assertTrue($request instanceof Adcloud_Request);
     }
 
     public function testDefaultRequestClass()
@@ -106,6 +105,6 @@ class Adcloud_ClientTest extends PHPUnit_Framework_TestCase
         $client = $this->getClient();
         $request = $client->request('foo');
 
-        $this->assertTrue($request instanceof Adcloud_Request_Http);
+        $this->assertTrue($request instanceof Adcloud_Request);
     }
 }

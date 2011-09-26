@@ -10,7 +10,7 @@ class Adcloud_Client
     /**
      * @var string
      */
-    private $requestClass = "Adcloud_Request_Http";
+    private $requestClass = "Adcloud_Request";
 
     /**
      * @param string $code

@@ -1,6 +1,6 @@
 <?php
 
-class Adcloud_Request_HttpTest extends PHPUnit_Framework_TestCase
+class Adcloud_RequestTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @return Adcloud_Client
@@ -16,7 +16,7 @@ class Adcloud_Request_HttpTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param Adcloud_Client $client
-     * @return Adcloud_Request_HttpTest
+     * @return Adcloud_Request
      */
     private function getRequest(Adcloud_Client $client = null)
     {
@@ -24,15 +24,7 @@ class Adcloud_Request_HttpTest extends PHPUnit_Framework_TestCase
             $client = $this->getMockClient();
         }
 
-        return new Adcloud_Request_Http('foo', $client);
-    }
-
-    public function testImplementsRequestInterface()
-    {
-        $request = $this->getRequest();
-        $interface = "Adcloud_Request";
-
-        $this->assertContains($interface, class_implements($request));
+        return new Adcloud_Request('foo', $client);
     }
 
     public function testResponseReturnsResultFromBackendExecute()
