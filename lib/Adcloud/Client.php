@@ -14,12 +14,23 @@ class Adcloud_Client
 
     /**
      * @param string $code
-     * @param strign $secret
+     * @param string $secret
      */
     public function __construct($code, $secret)
     {
+        $this->setDefaultBackend($code, $secret);
+    }
+
+    /**
+     * @param string $code
+     * @param string $secret
+     * @return Adcloud_Client
+     */
+    private function setDefaultBackend($code, $secret)
+    {
         $backend = new Adcloud_Backend_Curl($code, $secret);
         $this->setBackend($backend);
+        return $this;
     }
 
     /**
