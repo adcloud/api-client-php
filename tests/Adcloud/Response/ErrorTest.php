@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @covers Adcloud_Response_Error
+ */
 class Adcloud_Response_ErrorTest extends PHPUnit_Framework_TestCase
 {
     public function testGetStatusCode()

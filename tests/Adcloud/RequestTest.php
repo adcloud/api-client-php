@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @covers Adcloud_Request
+ */
 class Adcloud_RequestTest extends PHPUnit_Framework_TestCase
 {
     /**

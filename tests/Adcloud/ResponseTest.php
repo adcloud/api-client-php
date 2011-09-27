@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @covers Adcloud_Response
+ */
 class Adcloud_ResponseTest extends PHPUnit_Framework_TestCase
 {
     /**

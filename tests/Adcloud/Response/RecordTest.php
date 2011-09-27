@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @covers Adcloud_Response_Record
+ */
 class Adcloud_Response_RecordTest extends PHPUnit_Framework_TestCase
 {
     public function testGetResult()
