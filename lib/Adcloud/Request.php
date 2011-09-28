@@ -57,6 +57,15 @@ class Adcloud_Request
     }
 
     /**
+     * @return Adcloud_Request
+     */
+    public function clearFilter()
+    {
+        $this->filter = array();
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getEntity()

@@ -106,6 +106,15 @@ class Adcloud_RequestTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($filter, $request->getFilter());
     }
 
+    public function testClearFilter()
+    {
+        $request = $this->getRequest();
+        $request->addFilter('foo', 'bar');
+
+        $this->assertTrue($request === $request->clearFilter());
+        $this->assertEmpty($request->getFilter());
+    }
+
     public function testFilterKeysAreUnique()
     {
         $request = $this->getRequest();
