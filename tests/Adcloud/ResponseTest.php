@@ -35,7 +35,6 @@ class Adcloud_ResponseTest extends PHPUnit_Framework_TestCase
     {
         return array(
             'status' => 401,
-            'result' => null,
             'errors' => array('foo'),
         );
     }
@@ -80,15 +79,6 @@ class Adcloud_ResponseTest extends PHPUnit_Framework_TestCase
         $array = $this->getCollectionArray();
         $record = Adcloud_Response::fromArray($array);
         $this->assertTrue($record instanceof Adcloud_Response_Collection);
-    }
-
-    public function testExceptionIfResultIsMissingInErrorFromArray()
-    {
-        $array = $this->getErrorArray();
-        unset($array['result']);
-
-        $this->setExpectedException('InvalidArgumentException');
-        Adcloud_Response::fromArray($array);
     }
 
     public function testExceptionIfResultIsMissingInRecordFromArray()
