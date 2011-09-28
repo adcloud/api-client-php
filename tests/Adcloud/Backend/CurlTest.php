@@ -53,7 +53,7 @@ class TestBackend extends Adcloud_Backend_Curl
 }
 
 /**
- * BUGFIX: If we enable @covers here some classes in Adcloud_Response_*
+ * BUGFIX: If we enable covers here some classes in Adcloud_Response_*
  *         are not covered. That is a) strange and b) ugly. Seems to be
  *         a bug in XDebug or the PHPUnit coverage report generator.
  *
