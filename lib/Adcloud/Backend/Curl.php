@@ -49,7 +49,7 @@ class Adcloud_Backend_Curl implements Adcloud_Backend_Interface
         }
         if ($mode == 'POST') {
             curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
         }
 
         curl_setopt($curl, CURLOPT_URL, $url);        
