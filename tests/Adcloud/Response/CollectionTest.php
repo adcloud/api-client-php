@@ -56,6 +56,17 @@ class Adcloud_Response_CollectionTest extends PHPUnit_Framework_TestCase
     public function testExceptionIfResultIsNotAnArray()
     {
         $this->setExpectedException('InvalidArgumentException');
-        new Adcloud_Response_Collection(200, '');
+        new Adcloud_Response_Collection(200, '', array());
+    }
+
+    public function testAccessMetaData()
+    {
+        $metadata = array(
+            'some' => 'string',
+            'integer' => 42
+        );
+        $collection = $this->getCollection(null, null, $metadata);
+
+        $this->assertEquals($metadata, $collection->getMetadata()); 
     }
 }
