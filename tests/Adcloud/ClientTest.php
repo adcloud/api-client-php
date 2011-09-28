@@ -80,16 +80,13 @@ class Adcloud_ClientTest extends PHPUnit_Framework_TestCase
     public function testRequestCreatesNewRequestObject()
     {
         $client = $this->getClient();
+
+        $backend = $this->getMockBackend($client);
+        $backend->expects($this->once())
+            ->method('isAuthorized')
+            ->will($this->returnValue(true));
+
         $request = $client->request('foo');
-
-        $this->assertTrue($request instanceof Adcloud_Request);
-    }
-
-    public function testDefaultRequestClass()
-    {
-        $client = $this->getClient();
-        $request = $client->request('foo');
-
         $this->assertTrue($request instanceof Adcloud_Request);
     }
 }

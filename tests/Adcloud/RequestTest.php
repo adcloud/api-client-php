@@ -10,7 +10,7 @@ class Adcloud_RequestTest extends PHPUnit_Framework_TestCase
      */
     private function getMockBackend()
     {
-        return $this->getMock("Adcloud_Backend_Curl");
+        return $this->getMock('Adcloud_Backend_Curl');
     }
 
     /**
