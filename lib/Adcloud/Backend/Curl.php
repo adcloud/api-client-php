@@ -44,7 +44,7 @@ class Adcloud_Backend_Curl implements Adcloud_Backend_Interface
         $curl = curl_init();
         
         if ($mode == 'GET') {
-            // TODO: Add GET params
+            $url .= '?' . http_build_query($params);
             curl_setopt($curl, CURLOPT_HTTPGET, true);
         }
         if ($mode == 'POST') {
@@ -120,6 +120,17 @@ class Adcloud_Backend_Curl implements Adcloud_Backend_Interface
      */
     public function execute(Adcloud_Request $request)
     {
-        return $this;
+        $params = array(
+            'access_token' => $this->accessToken,
+            'filter' => $request->getFilter(),
+            'per_page' => $request->getPerPage(),
+            'page' => $request->getPage()
+        );
+        $url = '/' . trim($request->getEntity(), ' /');
+
+        $curl = $this->curlInit('GET', $url, $params);
+        $response = $this->curlExec($curl);
+
+        return Adcloud_Response::fromArray($response); 
     }
 }

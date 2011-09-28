@@ -140,4 +140,37 @@ class Adcloud_Backend_CurlTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('RuntimeException');
         $backend->authorize('code', 'secret');
     }
+
+    public function testExecuteGeneratesProperCollectionResponse()
+    {
+        $backend = $this->getBackend();
+        $backend->loadResponse('collection');
+
+        $request = new Adcloud_Request('test', $backend);
+        $response = $backend->execute($request);
+
+        $this->assertTrue($response instanceof Adcloud_Response_Collection);
+    }
+
+    public function testExecuteGeneratesProperRecordResponse()
+    {
+        $backend = $this->getBackend();
+        $backend->loadResponse('record');
+
+        $request = new Adcloud_Request('test', $backend);
+        $response = $backend->execute($request);
+
+        $this->assertTrue($response instanceof Adcloud_Response_Record);
+    }
+
+    public function testExecuteGeneratesProperErrorResponse()
+    {
+        $backend = $this->getBackend();
+        $backend->loadResponse('error');
+
+        $request = new Adcloud_Request('test', $backend);
+        $response = $backend->execute($request);
+
+        $this->assertTrue($response instanceof Adcloud_Response_Error);
+    }
 }
