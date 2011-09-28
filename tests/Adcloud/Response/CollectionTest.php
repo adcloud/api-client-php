@@ -41,9 +41,18 @@ class Adcloud_Response_CollectionTest extends PHPUnit_Framework_TestCase
 
     public function testGetResult()
     {
-        $result = array('foo', 'bar');
+        $result = array(
+            array('foo' => 'bar'), 
+            array('bar' => 'foo')
+        );
+
         $collection = $this->getCollection(200, $result);
-        $this->assertEquals($result, $collection->getResult());
+        $result = $collection->getResult();
+
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(2, count($result));
+        $this->assertTrue($result[0] instanceof Adcloud_Response_Record);
+        $this->assertTrue($result[1] instanceof Adcloud_Response_Record);
     }
 
     public function testImplementsResponseInterface()

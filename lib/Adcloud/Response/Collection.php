@@ -37,6 +37,15 @@ class Adcloud_Response_Collection extends Adcloud_Response_Record
                 "Collection result must be from type array"
             );
         }
+    
+        $oldResult = $result;
+        $result = array();
+
+        foreach ($oldResult as $record) {
+            $result[] = new Adcloud_Response_Record(
+                $this->getStatusCode(), $record
+            ); 
+        }
 
         return parent::setResult($result);
     }
