@@ -2,6 +2,7 @@
 
 /**
  * @covers Adcloud_Response_Record
+ * @covers Adcloud_Response_Interface
  */
 class Adcloud_Response_RecordTest extends PHPUnit_Framework_TestCase
 {
