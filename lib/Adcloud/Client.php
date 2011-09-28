@@ -3,14 +3,19 @@
 class Adcloud_Client
 {
     /**
-     * @var Adcloud_Backend
+     * @var Adcloud_Backend_Interface
      */
     private $backend;
 
-    /**
+    /** 
      * @var string
      */
-    private $requestClass = "Adcloud_Request";
+    private $code;
+
+    /** 
+     * @var string
+     */
+    private $secret;
 
     /**
      * @param string $code
@@ -18,26 +23,25 @@ class Adcloud_Client
      */
     public function __construct($code, $secret)
     {
-        $this->setDefaultBackend($code, $secret);
+        $this->code = $code;
+        $this->secret = $secret;
+        $this->setDefaultBackend();
     }
 
     /**
-     * @param string $code
-     * @param string $secret
      * @return Adcloud_Client
      */
-    private function setDefaultBackend($code, $secret)
+    private function setDefaultBackend()
     {
-        $backend = new Adcloud_Backend_Curl($code, $secret);
-        $this->setBackend($backend);
+        $this->setBackend(new Adcloud_Backend_Curl());
         return $this;
     }
 
     /**
-     * @param Adcloud_Backend $backend
+     * @param Adcloud_Backend_Interface $backend
      * @return Adcloud_Client
      */
-    public function setBackend(Adcloud_Backend $backend)
+    public function setBackend(Adcloud_Backend_Interface $backend)
     {
         $this->backend = $backend;
         return $this;
@@ -52,37 +56,16 @@ class Adcloud_Client
     }
 
     /**
-     * @return Adcloud_Client
-     */
-    public function authorize()
-    {
-        $this->backend->authorize();
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isAuthorized()
-    {
-        return $this->backend->isAuthorized();
-    }
-
-    /**
      * @param string $method
      * @return Adcloud_Request
      */
     public function request($method)
     {
-        return new $this->requestClass($method, $this);
-    }
+        if (!$this->backend->isAuthorized()) {
+            $this->backend->authorize($this->code, $this->secret);
+        }
 
-    /**
-     * @param Adcloud_Request $request
-     * @return Adcloud_Response
-     */
-    public function execute(Adcloud_Request $request)
-    {
-        return $this->backend->execute($request);
+        // TODO: Throw Exception if not authorized here
+        return new Adcloud_Request($method, $this->backend);
     }
 }

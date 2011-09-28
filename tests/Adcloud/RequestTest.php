@@ -6,36 +6,32 @@
 class Adcloud_RequestTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @return Adcloud_Client
+     * @return Adcloud_Backend_Interface
      */
-    private function getMockClient()
+    private function getMockBackend()
     {
-        return $this->getMock(
-            "Adcloud_Client",
-            array(),
-            array('code', 'secret')
-        );
+        return $this->getMock("Adcloud_Backend_Curl");
     }
 
     /**
-     * @param Adcloud_Client $client
+     * @param Adcloud_Backend_Interface $backend
      * @return Adcloud_Request
      */
-    private function getRequest(Adcloud_Client $client = null)
+    private function getRequest(Adcloud_Backend_Interface $backend = null)
     {
-        if ($client === null) {
-            $client = $this->getMockClient();
+        if ($backend === null) {
+            $backend = $this->getMockBackend();
         }
 
-        return new Adcloud_Request('foo', $client);
+        return new Adcloud_Request('foo', $backend);
     }
 
     public function testResponseReturnsResultFromBackendExecute()
     {
-        $client = $this->getMockClient();
-        $request = $this->getRequest($client);
+        $backend = $this->getMockBackend();
+        $request = $this->getRequest($backend);
 
-        $client->expects($this->once())
+        $backend->expects($this->once())
             ->method('execute')
             ->with($this->equalTo($request))
             ->will($this->returnValue('foo'));
@@ -88,8 +84,8 @@ class Adcloud_RequestTest extends PHPUnit_Framework_TestCase
 
     public function testEntiySetViaConstructorAndOwnGetter()
     {
-        $client = $this->getMockClient();
-        $request = new Adcloud_Request('foo/bar', $client);
+        $backend = $this->getMockBackend();
+        $request = new Adcloud_Request('foo/bar', $backend);
 
         $this->assertEquals('foo/bar', $request->getEntity());
     }

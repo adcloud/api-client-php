@@ -23,18 +23,18 @@ class Adcloud_Request
     private $entity;
 
     /**
-     * @var Adcloud_Client
+     * @var Adcloud_Backend_Interface
      */
-    private $client;
+    private $backend;
 
     /**
      * @param string $entity
-     * @param Adcloud_Client $client
+     * @param Adcloud_Backend_Interface $backend
      */
-    public function __construct($entity, Adcloud_Client $client)
+    public function __construct($entity, Adcloud_Backend_Interface $backend)
     {
         $this->entity = $entity;
-        $this->client = $client;
+        $this->backend = $backend;
     }
 
     /**
@@ -105,6 +105,6 @@ class Adcloud_Request
      */
     public function getResponse()
     {
-        return $this->client->execute($this);
+        return $this->backend->execute($this);
     }
 }

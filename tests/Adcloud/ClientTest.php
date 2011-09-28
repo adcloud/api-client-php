@@ -15,11 +15,11 @@ class Adcloud_ClientTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param Adcloud_Client $client
-     * @return Adcloud_Backend
+     * @return Adcloud_Backend_Interface
      */
     private function getMockBackend(Adcloud_Client $client = null)
     {
-        $backend = $this->getMock('Adcloud_Backend');
+        $backend = $this->getMock('Adcloud_Backend_Curl');
 
         if ($client !== null) {
             $client->setBackend($backend);
@@ -42,49 +42,31 @@ class Adcloud_ClientTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($secondBackend === $client->getBackend());
     }
 
-    public function testIsAuthorizedCallsBackend()
+    public function testAuthorizeCallsBackendNotIfAuthorized()
     {
         $client = $this->getClient();
         $backend = $this->getMockBackend($client);
 
         $backend->expects($this->once())
-            ->method('isAuthorized');
-       
-        $client->isAuthorized();
+            ->method('isAuthorized')
+            ->will($this->returnValue(true));
+
+        $client->request('foo');
     }
 
-    public function testAuthorizeCallsBackend()
+    public function testAuthorizeCallsBackendIfNotAuthorized()
     {
         $client = $this->getClient();
         $backend = $this->getMockBackend($client);
+
+        $backend->expects($this->once())
+            ->method('isAuthorized')
+            ->will($this->returnValue(false));
 
         $backend->expects($this->once())
             ->method('authorize');
        
-        $client->authorize();
-    }
-
-    public function testExecuteCallsBackend()
-    {
-        $client = $this->getClient();
-        $backend = $this->getMockBackend($client);
-        $request = new Adcloud_Request('foo', $client); 
-
-        $backend->expects($this->once())
-            ->method('execute')
-            ->with($this->equalTo($request))
-            ->will($this->returnValue('foo'));
-       
-        $response = $client->execute($request);
-        $this->assertEquals('foo', $response);
-    }
-
-    public function testAuthorizeReturnsThis()
-    {
-        $client = $this->getClient();
-        $backend = $this->getMockBackend($client);
-        
-        $this->assertTrue($client === $client->authorize());
+        $client->request('foo');
     }
 
     public function testDefaultBackend()
