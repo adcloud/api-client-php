@@ -54,6 +54,7 @@ class TestBackend extends Adcloud_Backend_Curl
 
 /**
  * @covers Adcloud_Backend_Curl
+ * @covers Adcloud_Backend_Interface
  */
 class Adcloud_Backend_CurlTest extends PHPUnit_Framework_TestCase
 {
