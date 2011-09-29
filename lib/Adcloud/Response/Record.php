@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * A single record that is returned from the server.
+ *
+ * @copyright  Copyright (c) 2011 Adcloud GmbH (http://www.adcloud.com)
+ * @license    see LICENSE file in project root
+ */
 class Adcloud_Response_Record implements Adcloud_Response_Interface
 {
     /**

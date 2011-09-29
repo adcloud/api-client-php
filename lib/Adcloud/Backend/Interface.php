@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Interface for all backends to fulfill.
+ *
+ * @copyright  Copyright (c) 2011 Adcloud GmbH (http://www.adcloud.com)
+ * @license    see LICENSE file in project root
+ */
 interface Adcloud_Backend_Interface
 {
     /**

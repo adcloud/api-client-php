@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This objects collects all the informations about the upcoming request
+ * from the user. If the request should be executed, this whole object
+ * is passed to the backend.
+ *
+ * @copyright  Copyright (c) 2011 Adcloud GmbH (http://www.adcloud.com)
+ * @license    see LICENSE file in project root
+ */
 class Adcloud_Request
 {
     /**

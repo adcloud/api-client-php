@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Abstract factory for the different response types. You can pass in
+ * either the raw JSON string or a PHP array and, if the structure is
+ * correct, the corresponding response object is returned.
+ *
+ * @copyright  Copyright (c) 2011 Adcloud GmbH (http://www.adcloud.com)
+ * @license    see LICENSE file in project root
+ */
 class Adcloud_Response
 {
     /**

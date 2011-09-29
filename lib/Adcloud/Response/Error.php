@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Response object for all errors that occurs on the server.
+ *
+ * @copyright  Copyright (c) 2011 Adcloud GmbH (http://www.adcloud.com)
+ * @license    see LICENSE file in project root
+ */
 class Adcloud_Response_Error extends Adcloud_Response_Record
 {
     /**

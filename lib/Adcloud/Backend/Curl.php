@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Simple backend that is based on the PHP curl extension. 
+ *
+ * @copyright  Copyright (c) 2011 Adcloud GmbH (http://www.adcloud.com)
+ * @license    see LICENSE file in project root
+ */
 class Adcloud_Backend_Curl implements Adcloud_Backend_Interface 
 {
     /**

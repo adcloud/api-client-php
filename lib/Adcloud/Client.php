@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * This is the main client that handles and connect everything (Backend, 
+ * Request, ..) together. It's more or less a small and simple proxy.
+ *
+ * @copyright  Copyright (c) 2011 Adcloud GmbH (http://www.adcloud.com)
+ * @license    see LICENSE file in project root
+ */
 class Adcloud_Client
 {
     /**

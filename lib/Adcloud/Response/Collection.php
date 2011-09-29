@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Response object for a collection of records. For example a list
+ * of all user-record. Every single record is returned as an instance
+ * of Adcloud_Response_Record with the same status code as the collection.
+ *
+ * @copyright  Copyright (c) 2011 Adcloud GmbH (http://www.adcloud.com)
+ * @license    see LICENSE file in project root
+ */
 class Adcloud_Response_Collection extends Adcloud_Response_Record 
 {
     /**
