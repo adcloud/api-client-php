@@ -7,8 +7,6 @@ the API and all json schema definitions can be found
 # Example
 
 <pre>
-<?php
-
 // Very very simple classloader
 function __autoload($class) {
     require 'lib/' . str_replace('_', '/', $class) . '.php';
