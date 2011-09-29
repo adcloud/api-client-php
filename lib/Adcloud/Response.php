@@ -4,31 +4,63 @@ class Adcloud_Response
 {
     /**
      * @param array $array
-     * @return Adcloud_Response_Interface
+     * @return integer
      */
-    public static function fromArray(array $array)
+    private static function getStatus(array $array)
     {
         if (!array_key_exists('status', $array)) {
             throw new InvalidArgumentException(
                 'Field >status< in reponse missing'
             );
         }
-        $status = $array['status'];
+        return $array['status'];
+    }
 
-        if (array_key_exists('errors', $array)) {
-            return new Adcloud_Response_Error(
-                $status, $array['errors']
-             );
-        }
-
+    /**
+     * @param array $array
+     * @return mixed
+     */
+    private static function getResult(array $array)
+    {
         if (!array_key_exists('result', $array)) {
             throw new InvalidArgumentException(
                 'Field >result< in reponse missing'
             );
         }
-        $result = $array['result'];
+        return $array['result'];
+    }
+   
+    /**
+     * @param array $array
+     * @return bool
+     */
+    private static function isErrorResponse(array $array)
+    {
+        return array_key_exists('errors', $array);
+    }
 
-        if (array_key_exists('collection', $array)) {
+    /**
+     * @param array $array
+     * @return bool
+     */
+    private static function isCollectionResponse(array $array)
+    {
+        return array_key_exists('collection', $array);
+    }
+
+    /**
+     * @param array $array
+     * @return Adcloud_Response_Interface
+     */
+    public static function fromArray(array $array)
+    {
+        $status = self::getStatus($array);
+        if (self::isErrorResponse($array)) {
+            return new Adcloud_Response_Error($status, $array['errors']);
+        }
+
+        $result = self::getResult($array);
+        if (self::isCollectionResponse($array)) {
             return new Adcloud_Response_Collection(
                 $status, $result, $array['collection']
             );
