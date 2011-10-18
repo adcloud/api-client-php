@@ -10,7 +10,7 @@ Vagrant::Config.run do |config|
     chef.chef_server_url = "http://chef.adcloud.net:4000"
     chef.validation_key_path = "#{ENV['HOME']}/.chef/adcloud.pem"
     chef.validation_client_name = "adcloud"
-    chef.node_name = 'adcloud-api-php'
+    chef.node_name = 'vagrant-api-client-php'
 
     chef.environment = "development"
     chef.add_role "base"
